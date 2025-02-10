@@ -2,7 +2,6 @@
 
 CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CURRENT="$(tmux display-message -p '#S')"
-Z_MODE="off"
 
 source "$CURRENT_DIR/tmuxinator.sh"
 source "$CURRENT_DIR/fzf-marks.sh"
