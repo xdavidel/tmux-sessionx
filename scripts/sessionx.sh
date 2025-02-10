@@ -135,5 +135,8 @@ run_plugin() {
 	fi
 }
 
+Z_MODE=$(tmux_option_or_fallback "@sessionx-zoxide-mode" "off")
+FZF_BUILTIN_TMUX=$(tmux_option_or_fallback "@sessionx-fzf-builtin-tmux" "off")
+
 run_plugin
 handle_output "$RESULT"

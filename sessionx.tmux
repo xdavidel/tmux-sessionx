@@ -66,7 +66,6 @@ handle_args() {
 	if [[ "$preview_enabled" == "true" ]]; then
 		PREVIEW_LINE="${SCRIPTS_DIR%/}/preview.sh ${PREVIEW_OPTIONS} {}"
 	fi
-	Z_MODE=$(tmux_option_or_fallback "@sessionx-zoxide-mode" "off")
 	CONFIGURATION_PATH=$(tmux_option_or_fallback "@sessionx-x-path" "$HOME/.config")
 	FZF_BUILTIN_TMUX=$(tmux_option_or_fallback "@sessionx-fzf-builtin-tmux" "off")
 
@@ -170,9 +169,6 @@ handle_args
 handle_extra_options
 
 tmux set-option -g @sessionx-_built-args "$(declare -p args)"
-
-tmux set-environment -g Z_MODE $Z_MODE
-tmux set-environment -g FZF_BUILTIN_TMUX $FZF_BUILTIN_TMUX
 
 if [ `tmux_option_or_fallback "@sessionx-prefix" "on"` = "on"  ]; then
 	tmux bind-key "$(tmux_option_or_fallback "@sessionx-bind" "O")" run-shell "$CURRENT_DIR/scripts/sessionx.sh"
