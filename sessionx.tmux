@@ -66,9 +66,9 @@ handle_args() {
 	if [[ "$preview_enabled" == "true" ]]; then
 		PREVIEW_LINE="${SCRIPTS_DIR%/}/preview.sh ${PREVIEW_OPTIONS} {}"
 	fi
-	Z_MODE=$(tmux_option_or_fallback "@sessionx-zoxide-mode" "off")
+	export Z_MODE=$(tmux_option_or_fallback "@sessionx-zoxide-mode" "off")
 	CONFIGURATION_PATH=$(tmux_option_or_fallback "@sessionx-x-path" "$HOME/.config")
-	FZF_BUILTIN_TMUX=$(tmux_option_or_fallback "@sessionx-fzf-builtin-tmux" "off")
+	export FZF_BUILTIN_TMUX=$(tmux_option_or_fallback "@sessionx-fzf-builtin-tmux" "off")
 
 	TREE_MODE="$bind_tree_mode:change-preview(${SCRIPTS_DIR%/}/preview.sh -t {1})"
 	CONFIGURATION_MODE="$bind_configuration_mode:reload(find $CONFIGURATION_PATH -mindepth 1 -maxdepth 1 -type d -o -type l)+change-preview($LS_COMMAND {})"
@@ -170,9 +170,6 @@ handle_args
 handle_extra_options
 
 tmux set-option -g @sessionx-_built-args "$(declare -p args)"
-
-export Z_MODE
-export FZF_BUILTIN_TMUX
 
 if [ `tmux_option_or_fallback "@sessionx-prefix" "on"` = "on"  ]; then
 	tmux bind-key "$(tmux_option_or_fallback "@sessionx-bind" "O")" run-shell "$CURRENT_DIR/scripts/sessionx.sh"
