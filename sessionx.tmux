@@ -171,6 +171,9 @@ handle_extra_options
 
 tmux set-option -g @sessionx-_built-args "$(declare -p args)"
 
+export Z_MODE
+export FZF_BUILTIN_TMUX
+
 if [ `tmux_option_or_fallback "@sessionx-prefix" "on"` = "on"  ]; then
 	tmux bind-key "$(tmux_option_or_fallback "@sessionx-bind" "O")" run-shell "$CURRENT_DIR/scripts/sessionx.sh"
 else
